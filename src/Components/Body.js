@@ -1,11 +1,13 @@
 import RestaurentCard from "./RestaurentCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
+
 
 const Body = () =>{
     const [listOfRestaurants, setListOfRestaurants] = useState([]);
     const [filteredRestaurent, setFilteredRestaurent] = useState([]);
-    const [searchText, setSearchText] = useState("");
+    const [searchText, setSearchText] = useState('');
 
     useEffect(()=> {
         fetchData();
@@ -17,7 +19,7 @@ const Body = () =>{
         );
         const json = await data.json();
 
-        console.log(json);
+        //console.log(json);
         setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurent(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
@@ -48,9 +50,10 @@ const Body = () =>{
                 className="filter-btn"
                 onClick={()=>{
                     const filteredList = listOfRestaurants.filter(
-                        (res) => res.info.avgRating > 4.5
+                        (res) => parseFloat(res.info.avgRating) > 4
                     );
-                    setListOfRestaurants(filteredList); 
+                    setFilteredRestaurent(filteredList); 
+                    console.log(filteredList);
                 }}
                 >
                   Top Rated Restaurents
@@ -58,7 +61,7 @@ const Body = () =>{
             </div>
             <div className="res-container">
                 {filteredRestaurent.map((restaurent) => (
-                    <RestaurentCard key={restaurent.info.id} resData={restaurent} />
+                    <Link key={restaurent.info.id} to={"/restaurants/"+ restaurent.info.id}><RestaurentCard resData={restaurent} /></Link>
                 ))}  
             </div>
         </div>
