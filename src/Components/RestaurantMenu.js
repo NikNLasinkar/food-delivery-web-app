@@ -9,6 +9,8 @@ const RestaurentMenu = () => {
 
     const resInfo = useRestaurantMenu(resId);
 
+    const [showIndex, setShowIndex] = useState();
+
    // console.log(resInfo);
    if(resInfo === null) return <Shimmer />;
 
@@ -31,8 +33,14 @@ const RestaurentMenu = () => {
                 {cuisines.join(", ")} - {costForTwoMessage}
             </p> 
             {/* {categories accordions} */}
-            {categories.map((category) => (
-                <RestaurantCategory key={category?.card?.card?.title} data={category?.card?.card}/>
+            {categories.map((category, index) => (
+                // controlled components
+                <RestaurantCategory 
+                key={category?.card?.card?.title} 
+                data={category?.card?.card} 
+                showItems={index === showIndex && true } 
+                setShowIndex={()=>setShowIndex(index)}
+                />
             ))}
         </div>
     );
