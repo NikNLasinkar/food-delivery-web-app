@@ -1,7 +1,10 @@
 const Grocery = () => {
     return (
-        <h1>This is Grocery Page</h1>
+      <h1 style={{ textAlign: 'center', marginTop: '100px' }}>
+        Our Grocery Online Store, we have a lot of child components inside this
+        web page
+      </h1>
     );
-}
-
-export default Grocery;
+  };
+  
+  export default Grocery;

@@ -1,6 +1,6 @@
-import { useEffect, useState} from "react";
+import { useState} from "react";
 import Shimmer from "./Shimmer";
-import { useParams } from "react-router-dom";
+import {Link, useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import RestaurantCategory from "./RestaurantCategory";
 
@@ -32,6 +32,15 @@ const RestaurentMenu = () => {
             <p className="font-bold text-lg">
                 {cuisines.join(", ")} - {costForTwoMessage}
             </p> 
+            <div className="text-left">
+                <Link
+                to="/"
+                className="px-4 py-2 ml-40 font-bold duration-[0.3s] bg-green-400 rounded-md hover:bg-green-500"
+                >
+                &larr; Back
+                </Link>
+            </div>
+
             {/* {categories accordions} */}
             {categories.map((category, index) => (
                 // controlled components
